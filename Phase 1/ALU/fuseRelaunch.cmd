@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "secureip" -o "D:/Phase 2/Major Task Part 1/ALU/ALUTest_isim_beh.exe" -prj "D:/Phase 2/Major Task Part 1/ALU/ALUTest_beh.prj" "work.ALUTest" 
