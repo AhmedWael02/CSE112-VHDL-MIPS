@@ -43,6 +43,31 @@ begin
 				cflag <= cvariable;
 				---------------------
 				
+				------subtraction-----------
+				when "0110" =>
+				cintemp := '1';
+				temp := ('0' & data1) + ('0' & NOT(data2)) + cintemp;
+				outvariable := temp (31 downto 0);
+				cvariable := NOT(temp(32));
+				oflag <= (data1(31) AND NOT(data2(31)) AND NOT(outvariable(31))) OR (NOT(data1(31)) AND data2(31) AND outvariable(31));
+				cflag <= cvariable;
+				---------------------
+				
+				------AND-----------
+				when "0000" =>
+				outvariable := data1 and data2;
+				---------------------
+				
+				------OR-----------
+				when "0001" =>
+				outvariable := data1 or data2;
+				---------------------
+				
+				------NOR-----------
+				when "1100" =>
+				outvariable := data1 nor data2;
+				---------------------
+				
 				when others =>
 				outvariable := "ZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZZ";
 				

@@ -53,6 +53,65 @@ BEGIN
 begin		
 			cin <= '0';
      		wait for 10 ns;
+		--AND testcase1
+			data1 <= "11000000000000000000000000000000" ;
+			data2 <= "10100000000000000000000000000000" ;
+			aluop <= "0000" ;
+			wait for 10 ns;
+			report "Test1";
+			assert(dataout = "10000000000000000000000000000000" and zflag = '0') report "1:Fail" severity error;
+
+			wait for 1 ns;
+			
+		--AND testcase2
+			data1 <= x"0F0F0F0F";
+			data2 <= x"F0F0F0FF";
+			aluop <= "0000" ;
+			wait for 10ns;
+			report "Test2";
+			assert(dataout = x"0000000F" and zflag = '0') report "2:Fail" severity error;
+			
+			wait for 1 ns;
+		
+		--OR testcase1
+			data1 <= "11000000000000000000000000000000" ;
+			data2 <= "10100000000000000000000000000000" ;
+			aluop <= "0001" ;
+			wait for 10 ns;
+			report "Test3";
+			assert(dataout = "11100000000000000000000000000000" and zflag = '0') report "3:Fail" severity error;
+
+			wait for 1 ns;
+			
+		--OR testcase2
+			data1 <= x"0F0F0F0F";
+			data2 <= x"F0F0F0FF";
+			aluop <= "0001" ;
+			wait for 10ns;
+			report "Test4";
+			assert(dataout = x"FFFFFFFF" and zflag = '0') report "5:Fail" severity error;
+			
+			wait for 1 ns;
+			
+		--NOR testcase1
+			data1 <= "11000000000000000000000000000000" ;
+			data2 <= "10100000000000000000000000000000" ;
+			aluop <= "1100" ;
+			wait for 10 ns;
+			report "Test6";
+			assert(dataout = "00011111111111111111111111111111" and zflag = '0') report "6:Fail" severity error;
+
+			wait for 1 ns;
+			
+		--NOR testcase2
+			data1 <= x"0F0F0F0F";
+			data2 <= x"F0F0F0FF";
+			aluop <= "1100" ;
+			wait for 10ns;
+			report "Test7";
+			assert(dataout = x"00000000" and zflag = '1') report "7:Fail" severity error;
+			
+			wait for 1 ns;
 		
 		--ADD testcase1 (overflow = 1, cout = 0)
 			data1 <= "01110000000000000000000000000000" ;
@@ -101,6 +160,77 @@ begin
 			wait for 10ns;
 			report "Test12";
 			assert(dataout = "11111111111111111111111111111110" and oflag = '1' and cflag = '0' and zflag = '0') report "12:Fail" severity error;
+			
+			wait for 1 ns;
+
+		--SUB testcase1 (cout = 0)
+			data1 <= "00000000000000000000000000000111" ; --a = 7
+			data2 <= "00000000000000000000000000000110" ; --b = 6
+			cin <= '1';
+			aluop <= "0110" ;
+			wait for 10 ns;
+			report "Test13";
+			assert(dataout = "00000000000000000000000000000001" and oflag = '0' and cflag = '0' and zflag = '0') report "13:Fail" severity error;
+
+			wait for 1 ns;
+
+		--SUB testcase2 (cout = 1)
+			data1 <= "00000000000000000000000000000110" ; --a = 6
+			data2 <= "00000000000000000000000000000111" ; --b = 7
+			aluop <= "0110" ;
+			wait for 10 ns;
+			report "Test14";
+			assert(dataout = "11111111111111111111111111111111" and oflag = '0' and cflag = '1' and zflag = '0') report "14:Fail" severity error;
+
+			wait for 1 ns;
+			
+		--SUB testcase3 (zero = 1, cout = 0)
+			data1 <= "00000000000000000000000000000110" ; --a = 6
+			data2 <= "00000000000000000000000000000110" ; --b = 6
+			aluop <= "0110" ;
+			wait for 10ns;
+			report "Test15";
+			assert(dataout = "00000000000000000000000000000000" and oflag = '0' and cflag = '0' and zflag = '1') report "15:Fail" severity error;
+			
+			wait for 1 ns;
+
+		--SUB testcase4 (cout = 1)
+			data1 <= "00000000000000000000000000000110" ; --a = 6
+			data2 <= "11111111111111111111111111111010" ; --b = -6
+			aluop <= "0110" ;
+			wait for 10ns;
+			report "Test16";
+			assert(dataout = "00000000000000000000000000001100" and oflag = '0' and cflag = '1' and zflag = '0') report "16:Fail" severity error;
+			
+			wait for 1 ns;
+			
+		--SUB testcase5 (cout = 0)
+			data1 <= x"0000000C";
+			data2 <= x"0000000A";
+			aluop <= "0110" ;
+			wait for 10ns;
+			report "Test17";
+			assert(dataout = "00000000000000000000000000000010" and oflag = '0' and cflag = '0' and zflag = '0') report "17:Fail" severity error;
+			
+			wait for 1 ns;
+			
+		--SUB testcase6 (cout = 1)
+			data1 <= x"FFFFFFF9";
+			data2 <= x"FFFFFFFA";
+			aluop <= "0110" ;
+			wait for 10ns;
+			report "Test18";
+			assert(dataout = "11111111111111111111111111111111" and oflag = '0' and cflag = '1' and zflag = '0') report "18:Fail" severity error;
+			
+			wait for 1 ns;
+			
+		--SUB testcase7 (zero = 1, cout = 0)
+			data1 <= x"00000001";
+			data2 <= x"00000001";
+			aluop <= "0110" ;
+			wait for 10ns;
+			report "Test19";
+			assert(dataout = "00000000000000000000000000000000" and oflag = '0' and cflag = '0' and zflag = '1') report "19:Fail" severity error;
 			
 			wait for 1 ns;
 			
