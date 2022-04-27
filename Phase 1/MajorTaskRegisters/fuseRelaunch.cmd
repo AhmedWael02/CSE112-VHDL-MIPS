@@ -1,0 +1,1 @@
+-intstyle "ise" -incremental -lib "secureip" -o "D:/Phase 2/Major Task Part 1/MajorTaskRegisters/RegisterFileTest_isim_beh.exe" -prj "D:/Phase 2/Major Task Part 1/MajorTaskRegisters/RegisterFileTest_beh.prj" "work.RegisterFileTest" 
