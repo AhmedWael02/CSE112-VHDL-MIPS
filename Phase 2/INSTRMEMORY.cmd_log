@@ -1,0 +1,2 @@
+xst -intstyle ise -ifn "D:/Phase 2/Trials/Try1/INSTRMEMORY.xst" -ofn "D:/Phase 2/Trials/Try1/INSTRMEMORY.syr" 
+xst -intstyle ise -ifn "D:/Phase 2/Trials/Try1/INSTRMEMORY.xst" -ofn "D:/Phase 2/Trials/Try1/INSTRMEMORY.syr" 

@@ -1,0 +1,7 @@
+xst -intstyle ise -ifn "C:/Users/medom/OneDrive/Desktop/Try3/Try11/MIPSCPU.xst" -ofn "C:/Users/medom/OneDrive/Desktop/Try3/Try11/MIPSCPU.syr" 
+xst -intstyle ise -ifn "C:/Users/medom/OneDrive/Desktop/Try120/MIPSCPU.xst" -ofn "C:/Users/medom/OneDrive/Desktop/Try120/MIPSCPU.syr" 
+xst -intstyle ise -ifn "C:/Users/medom/OneDrive/Desktop/Try120/MIPSCPU.xst" -ofn "C:/Users/medom/OneDrive/Desktop/Try120/MIPSCPU.syr" 
+xst -intstyle ise -ifn "C:/Users/medom/OneDrive/Desktop/Try120/MIPSCPU.xst" -ofn "C:/Users/medom/OneDrive/Desktop/Try120/MIPSCPU.syr" 
+xst -intstyle ise -ifn "C:/Users/medom/OneDrive/Desktop/Try120/MIPSCPU.xst" -ofn "C:/Users/medom/OneDrive/Desktop/Try120/MIPSCPU.syr" 
+xst -intstyle ise -ifn "C:/Users/oswel/Desktop/Latest trials/BynawarA5dar - Trials/MIPSCPU.xst" -ofn "C:/Users/oswel/Desktop/Latest trials/BynawarA5dar - Trials/MIPSCPU.syr" 
+xst -intstyle ise -ifn "D:/Advertising Trials/Try1/MIPSCPU.xst" -ofn "D:/Advertising Trials/Try1/MIPSCPU.syr" 
