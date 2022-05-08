@@ -1,0 +1,85 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.STD_LOGIC_SIGNED.all;
+use IEEE.STD_LOGIC_ARITH.all;
+
+use IEEE.std_logic_textio.all;
+library STD;
+use STD.textio.all;
+
+----Only removed the generic variables and replaced them with equivalent numbers as the whole code was non-generic----
+
+entity INSTRMEMORY is
+	
+  port(
+    LoadIt  : in Std_logic ;
+	 DATA    : out STD_LOGIC_VECTOR(31 downto 0);
+    ADDRESS : in STD_LOGIC_VECTOR(31 downto 0);
+    CLK     : in STD_LOGIC
+    );
+end INSTRMEMORY;
+
+
+architecture BEHAVIORAL of INSTRMEMORY is
+	signal ADDRover4: STD_LOGIC_VECTOR(29 downto 0);		                                    
+begin
+
+ROM_PROCESS: process(CLK, ADDRESS) is
+                                    type MEM is array(0 to 63) of STD_LOGIC_VECTOR(31 downto 0);
+                                    variable MEMORY: MEM := (others => X"00000000");
+                                    variable IADR: INTEGER;
+    												
+begin
+
+    if LoadIt = '1' then
+--------------------------
+--Project1 test
+--------------------------
+		MEMORY(0)  := "00000000000000000100000000100101" ;
+		MEMORY(1)  := "10001100000011010000000000110000" ;
+		MEMORY(2)  := "10001100000110000000000000110100" ;
+		MEMORY(3)  := "10001100000110010000000000111000" ;
+		MEMORY(4)  := "00000000000110000101000000100000" ;
+		MEMORY(5)  := "10101101000010100000000000000000" ;
+		MEMORY(6)  := "10101101000010100000000000000100" ;
+		MEMORY(7)  := "00000001101110000100100000100010" ; ---
+		MEMORY(8)  := "00000001001110000100100000100010" ;
+		MEMORY(9)  := "10001101000010110000000000000000" ; -- loop
+		MEMORY(10) := "10001101000011000000000000000100" ;
+		MEMORY(11) := "00000001011011000101000000100000" ;
+		MEMORY(12) := "10101101000010100000000000001000" ;
+		MEMORY(13) := "00000001000110010100000000100000" ;
+		MEMORY(14) := "00000001001110000100100000100010" ;
+		MEMORY(15) := "00000000000010010000100000101010" ;
+		MEMORY(16) := "00010000001000000000000000000001" ; -- beq	$at, $zero, exit
+		MEMORY(17) := "00001000000000000000000000001001" ; 
+		MEMORY(18) := "00000000000001000010000000100100" ;
+		MEMORY(19) := "00000000000011010010100000100000" ;
+		MEMORY(20) := "00001000000000000000000000010110" ;
+		MEMORY(21) := "00000000000110001000000000100010" ; -- sub $s0, $zero, $t8
+		MEMORY(22) := "00000001000000000100000000100100" ;
+		MEMORY(23) := "00000001000010000100100000100000" ;
+		MEMORY(24) := "00000001001010010100100000100000" ;
+		MEMORY(25) := "00000000100010010101000000100000" ;
+		MEMORY(26) := "10001101010100000000000000000000" ;
+		MEMORY(27) := "00000001000110000100000000100000" ;
+		MEMORY(28) := "00000001000001010000100000101010" ;
+		MEMORY(29) := "00010100001000001111111111111001" ; -- BNE $at $zero 0xFFF9 -- 0x1420FFF9
+		MEMORY(30) := "00000000000000001100000000100111" ;
+		MEMORY(31) := "00000010000110001000000000100111" ;
+--		MEMORY(32) := "00001000000000000000000000010101" ; -- removed this instruction of jumping back because after testing, it is making the program to go into an infinite loop.
+		MEMORY(32) := "00000010000110001000000000100000" ; -- added this instruction of add $s0, $s0, $t8 instead of sub $s0, $s0, $t8 because this instruction is wrong producing 1 instead of the -1 one required--
+		MEMORY(33) := "00000010000110001000000000100000" ; -- added an extra instruction same as the previous one to read the new value after it has been written to $s0
+
+
+	end if;
+
+    if FALLING_EDGE(CLK) then
+      IADR:= CONV_INTEGER(ADDRover4);
+      DATA <= MEMORY(IADR);
+    end if;
+  end process;
+  
+  ADDRover4 <= ADDRESS(31 downto 2) ;
+	
+end BEHAVIORAL;
